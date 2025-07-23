@@ -9,7 +9,7 @@ export const cutoffRouter = createTRPCRouter({
         .input(
             z.object({
                 query: z.string().optional(),
-                course: z.string().optional(),
+                courses: z.string().array().optional(),
                 category: z.string().optional(),
                 percent: z.number().optional(),
                 page: z.number().optional(),
@@ -17,7 +17,7 @@ export const cutoffRouter = createTRPCRouter({
             })
         )
         .query(async ({ input }) => {
-            const { query, course, category, percent } = input;
+            const { query, courses, category, percent } = input;
             const page = input.page ?? 1;
             const pageSize = input.pageSize ?? 10;
             const skip = (page - 1) * pageSize;
@@ -65,13 +65,16 @@ export const cutoffRouter = createTRPCRouter({
                 take,
             });
 
-            const allCourses = colleges.flatMap((c) => c.courses ?? []);
+            const allCourses = colleges.flatMap((c: typeof colleges[number]) => c.courses ?? []);
 
-            const filteredCourses = course
+            const filteredCourses = courses && courses.length > 0
                 ? allCourses.filter(
                     (c) =>
-                        (c.name?.toLowerCase?.().includes(course.toLowerCase()) ?? false) ||
-                        c.choiceCode === course
+                        courses.some(
+                            (course) =>
+                                (c.name?.toLowerCase?.().includes(course.toLowerCase()) ?? false) ||
+                                c.choiceCode === course
+                        )
                 )
                 : allCourses;
 
@@ -98,7 +101,7 @@ export const cutoffRouter = createTRPCRouter({
 
                         results.push({
                             collegeName:
-                                colleges.find((col) => col.id === course.collegeId)?.name ??
+                                colleges.find((col: typeof colleges[number]) => col.id === course.collegeId)?.name ??
                                 "Unknown",
                             courseName: course.name ?? "Unknown",
                             capRound: course.capRound ?? "Unknown",
@@ -124,4 +127,11 @@ export const cutoffRouter = createTRPCRouter({
                 },
             };
         }),
+    getAllCourses: publicProcedure.query(async () => {
+        const courses = await db.course.findMany({
+            select: { name: true },
+            distinct: ['name'],
+        });
+        return courses.map(c => c.name).filter(Boolean);
+    }),
 });

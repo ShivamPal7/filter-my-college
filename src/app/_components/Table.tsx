@@ -72,7 +72,8 @@ const cutoffColumns: ColumnDef<Cutoff>[] = [
 export function DataTableDemo() {
   // Filter state
   const [query, setQuery] = useState("");
-  const [course, setCourse] = useState("");
+  // Change course state to array
+  const [courses, setCourses] = useState<string[]>([]);
   const [category, setCategory] = useState("");
   const [percent, setPercent] = useState<string>("");
   const [page, setPage] = useState(1);
@@ -81,7 +82,7 @@ export function DataTableDemo() {
   // Fetch data from API
   const { data, isLoading } = api.cutoff.getCutoffsByQuery.useQuery({
     query: query || undefined,
-    course: course || undefined,
+    courses: courses.length > 0 ? courses : undefined,
     category: category || undefined,
     percent: percent ? Number(percent) : undefined,
     page,
@@ -114,13 +115,10 @@ export function DataTableDemo() {
     }
   };
   
+  // Fetch all courses for dropdown
+  const { data: allCourses } = api.cutoff.getAllCourses.useQuery();
   // Extract unique courses and categories from results for dropdowns
-  const courseOptions = useMemo(() => {
-    if (!data) return [];
-    const set = new Set<string>();
-    data.results.forEach((r) => set.add(r.courseName));
-    return Array.from(set);
-  }, [data]);
+  const courseOptions = useMemo(() => allCourses || [], [allCourses]);
   const categoryOptions = useMemo(() => {
     if (!data) return [];
     const set = new Set<string>();
@@ -168,18 +166,31 @@ export function DataTableDemo() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="w-full h-10 justify-between">
-                {course ? course : "Select Course"}
+                {courses.length > 0 ? courses.join(", ") : "Select Course(s)"}
                 <ChevronDown className="ml-2" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-full min-w-[180px]">
-              <DropdownMenuItem onClick={() => { setCourse(""); setPage(1); }}>
-                {course === "" && <Check className="mr-2 w-4 h-4" />}All Courses
-              </DropdownMenuItem>
+              <DropdownMenuCheckboxItem
+                checked={courses.length === 0}
+                onCheckedChange={() => { setCourses([]); setPage(1); }}
+              >
+                {courses.length === 0 && <Check className="mr-2 w-4 h-4" />}All Courses
+              </DropdownMenuCheckboxItem>
               {courseOptions.map((c) => (
-                <DropdownMenuItem key={c} onClick={() => { setCourse(c); setPage(1); }}>
-                  {course === c && <Check className="mr-2 w-4 h-4" />}{c}
-                </DropdownMenuItem>
+                <DropdownMenuCheckboxItem
+                  key={c}
+                  checked={courses.includes(c)}
+                  onCheckedChange={(checked) => {
+                    setCourses((prev) => {
+                      if (checked) return [...prev, c];
+                      return prev.filter((item) => item !== c);
+                    });
+                    setPage(1);
+                  }}
+                >
+                  {courses.includes(c) && <Check className="mr-2 w-4 h-4" />}{c}
+                </DropdownMenuCheckboxItem>
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
@@ -217,7 +228,7 @@ export function DataTableDemo() {
         <Button
           variant="ghost"
           className="h-10 px-3 text-muted-foreground border border-input"
-          onClick={() => { setQuery(""); setCourse(""); setCategory(""); setPercent(""); setPage(1); }}
+          onClick={() => { setQuery(""); setCourses([]); setCategory(""); setPercent(""); setPage(1); }}
         >
           <X className="w-4 h-4 mr-1" /> Clear Filters
         </Button>
