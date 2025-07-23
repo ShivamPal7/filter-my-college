@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model College {
+  id          Int      @id @default(autoincrement())
+  name        String
+  code        String @unique
+  courses     Course[]
+}
+
+model Course {
+  id          Int       @id @default(autoincrement())
+  name        String
+  choiceCode  String
+  capRound    String
+  college     College   @relation(fields: [collegeId], references: [id])
+  collegeId   Int
+  stages      Stage[]
+}
+
+model Stage {
+  id        Int        @id @default(autoincrement())
+  name      String
+  course    Course     @relation(fields: [courseId], references: [id])
+  courseId  Int
+  cutoffs   Cutoff[]
+}
+
+model Cutoff {
+  id        Int     @id @default(autoincrement())
+  category  String
+  rank      Int
+  percent   Float
+  stage     Stage   @relation(fields: [stageId], references: [id])
+  stageId   Int
+}

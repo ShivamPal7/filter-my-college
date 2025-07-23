@@ -1,0 +1,100 @@
+1: GOVERNMENT OF MAHARASHTRA
+2: State Common Entrance Test Cell, Mumbai.
+3: Address : 8th Floor, New Excelsior Building, A. K. Nayak Marg, Fort, Mumbai- 400 001.(M.S.)
+4: Provisional Cutoff List of CAP Round I For Admission to Direct Second Year of Full Time
+5: Under Graduate Courses in Engineering/Technology for AY 2024-25
+6: Published On : 21-08-2024
+7: 1002 Government College of Engineering, Amravati (Government Autonomous)
+8: Choice Code : 100219110Course Name :Civil Engineering
+9: GOPENGSCGSEBCLOPENLSTLOBCEWS
+10: Stage-I
+11: 1432
+12: (91.37%)
+13: 2087
+14: (90.26%)
+15: 2895
+16: (89.21%)
+17: 1270
+18: (91.68%)
+19: 7466
+20: (85.05%)
+21: 1376
+22: (91.48%)
+23: 6296
+24: (85.95%)
+25: 1002 Government College of Engineering, Amravati (Government Autonomous)
+26: Choice Code : 100224210Course Name :Computer Science and Engineering
+27: GOPENGSCGSTGOBCLOPENLSEBCEWS
+28: Stage-I
+29: 658
+30: (93.21%)
+31: 2779
+32: (89.37%)
+33: 27871
+34: (73.60%)
+35: 1094
+36: (92.05%)
+37: 396
+38: (94.16%)
+39: 2806
+40: (89.31%)
+41: 3001
+42: (89.09%)
+43: L - Ladies G - General MI - Minority PWD - Persons with Disabilities DEF - Defence R-Reserved Common, EWS - Economically Weaker SectionSTATE CET CELL , Mumbai    Page 1 of 632
+44: Provisional cutoff List of CAP Round I For Admission to Direct Second Year Engineering/Technology For AY 2024-25, Published On :21-08-2024
+45: 1002 Government College of Engineering, Amravati (Government Autonomous)
+46: Choice Code : 100224610Course Name :Information Technology
+47: GOPENGSTGSEBCLOPENLSCLOBCEWS
+48: Stage-I
+49: 1320
+50: (91.58%)
+51: 33650
+52: (70.80%)
+53: 1794
+54: (90.74%)
+55: 1244
+56: (91.74%)
+57: 5634
+58: (86.51%)
+59: 1512
+60: (91.20%)
+61: 3559
+62: (88.51%)
+63: 1002 Government College of Engineering, Amravati (Government Autonomous)
+64: Choice Code : 100229310Course Name :Electrical Engineering
+65: GOPENGSCGNTAGOBCGSEBCLOPENLSTEWS
+66: Stage-I
+67: 1390
+68: (91.44%)
+69: 2393
+70: (89.89%)
+71: 4219
+72: (87.83%)
+73: 1500
+74: (91.22%)
+75: 1716
+76: (90.89%)
+77: 2839
+78: (89.28%)
+79: 13793
+80: (80.94%)
+81: 6107
+82: (86.11%)
+83: 1002 Government College of Engineering, Amravati (Government Autonomous)
+84: Choice Code : 100237210Course Name :Electronics and Telecommunication Engg
+85: GOPENGSCGSTGOBCLOPENLOBCLSEBCEWS
+86: Stage-I
+87: 1991
+88: (90.41%)
+89: 8926
+90: (84.00%)
+91: 36099
+92: (69.59%)
+93: 2793
+94: (89.35%)
+95: 2744
+96: (89.41%)
+97: 4829
+98: (87.24%)
+99: 3299
+100: (88.76%)
